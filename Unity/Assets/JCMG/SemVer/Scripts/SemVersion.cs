@@ -36,6 +36,7 @@ namespace JCMG.SemVer
 	/// </summary>
 	[Serializable]
 	public sealed class SemVersion :
+		IEquatable<SemVersion>,
 		IComparable<SemVersion>,
 		IComparable,
 		ISerializable
@@ -343,22 +344,7 @@ namespace JCMG.SemVer
 		/// <param name="obj">The <see cref="object" /> to compare with this instance.</param>
 		public override bool Equals(object obj)
 		{
-			if(ReferenceEquals(this, obj))
-			{
-				return true;
-			}
-
-			var otherVersion = obj as SemVersion;
-			if (ReferenceEquals(otherVersion, null))
-			{
-				return false;
-			}
-
-			return _major == otherVersion.Major &&
-			       _minor == otherVersion.Minor &&
-			       _patch == otherVersion.Patch &&
-			       string.Equals(_prerelease, otherVersion.Prerelease, StringComparison.Ordinal) &&
-			       string.Equals(_build, otherVersion.Build, StringComparison.Ordinal);
+			return ReferenceEquals(this, obj) || obj is SemVersion other && Equals(other);
 		}
 
 		/// <summary>
@@ -371,14 +357,26 @@ namespace JCMG.SemVer
 		{
 			unchecked
 			{
-				var result = _major.GetHashCode();
-				result = result * 31 + _minor.GetHashCode();
-				result = result * 31 + _patch.GetHashCode();
-				result = result * 31 + _prerelease.GetHashCode();
-				result = result * 31 + _build.GetHashCode();
-				return result;
+				int hashCode = _major;
+				hashCode = (hashCode * 397) ^ _minor;
+				hashCode = (hashCode * 397) ^ _patch;
+				hashCode = (hashCode * 397) ^ (_prerelease != null ? _prerelease.GetHashCode() : 0);
+				hashCode = (hashCode * 397) ^ (_build != null ? _build.GetHashCode() : 0);
+				return hashCode;
 			}
 		}
+
+		#region IEquatable<SemVersion>
+
+		/// <inheritdoc />
+		public bool Equals(SemVersion other)
+		{
+			if (ReferenceEquals(null, other)) return false;
+			if (ReferenceEquals(this, other)) return true;
+			return _major == other._major && _minor == other._minor && _patch == other._patch && _prerelease == other._prerelease && _build == other._build;
+		}
+
+		#endregion
 
 		#region IComparable
 
