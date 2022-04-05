@@ -14,17 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   packageSourcePaths:
   - Assets/JCMG/SemVer
+  packageIgnorePaths: []
   packageDestinationPath: ../../unity-semver_release
+  legacyPackageDestinationPath: 
   packageName: com.jeffcampbellmakesgames.semver
   displayName: JCMG SemVer
-  packageVersion: 1.0.4
+  packageVersion: 1.0.5
   unityVersion: 2018.1
   description: This package provides adds a SemVer 2.0.0 implementation for Unity.
     \n\nTo find out more, visit https://github.com/jeffcampbellmakesgames/unity-semver.
   category: Tools
+  author:
+    name: Jeff Campbell
+    email: mirraraenn@gmail.com
+    url: https://github.com/jeffcampbellmakesgames
   keywords:
   - version
   - versioning
   - semver
   dependencies: []
+  versionConstantsPath: 
+  versionTemplateGuid: 
   _id: 8f488714-f683-48e8-a4d6-68982157216b

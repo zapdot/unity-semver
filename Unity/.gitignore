@@ -1,6 +1,7 @@
 # =============== #
 # Unity generated #
 # =============== #
+[Ll]ogs/
 [Tt]emp/
 [Oo]bj/
 [Bb]uild
@@ -21,7 +22,7 @@ JetBrains.meta
 /*.csproj
 /*.pidb
 /*.suo
-/*.sln
+/*.sln*
 /*.user
 /*.unityproj
 /*.booproj
